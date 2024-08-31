@@ -1,5 +1,5 @@
 // get-ip.ts
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 

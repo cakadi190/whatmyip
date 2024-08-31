@@ -1,5 +1,5 @@
 // hello.ts
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
