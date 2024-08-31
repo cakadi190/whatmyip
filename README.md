@@ -1,40 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# What My IP Address?
 
-## Getting Started
+**What My IP Address?** adalah aplikasi web yang dibangun menggunakan Next.js untuk menampilkan alamat IP klien (IPv4 dan IPv6). Aplikasi ini dirancang untuk membantu pengguna melihat informasi alamat IP mereka secara real-time.
 
-First, run the development server:
+## Fitur
+
+- **Menampilkan IPv4 dan IPv6:** Secara otomatis mendeteksi dan menampilkan alamat IPv4 dan IPv6 klien.
+- **Server-Side Rendering (SSR):** Menggunakan Next.js untuk performa optimal dan SEO yang lebih baik.
+- **API Routes:** Endpoint API disediakan untuk mendapatkan alamat IP klien.
+- **Dukungan TypeScript:** Menggunakan TypeScript untuk keamanan tipe dan deteksi kesalahan lebih awal.
+- **Desain Responsif:** Tampilan yang responsif untuk semua jenis perangkat.
+
+## Instalasi
+
+1. Clone repositori:
+
+   ```bash
+   git clone https://github.com/cakadi190/whatmyip.git
+   cd whatmyip
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Jalankan aplikasi di mode pengembangan:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat hasilnya.
+
+## Struktur Proyek
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+.
+├── /pages           # Halaman-halaman Next.js
+│   ├── /api         # API routes untuk mendapatkan IP
+│   └── index.tsx    # Halaman utama untuk menampilkan IP
+├── /public          # File statis seperti gambar, favicon, dll.
+├── /styles          # CSS dan file style lainnya
+├── /components      # Komponen-komponen React
+├── next.config.js   # Konfigurasi Next.js
+└── tsconfig.json    # Konfigurasi TypeScript
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Cara Penggunaan
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **Menampilkan Alamat IP:** Secara default, halaman utama akan menampilkan alamat IP (IPv4 dan IPv6) klien.
+- **Endpoint API:** Menggunakan API route `/api/get-ip` untuk mendapatkan alamat IP klien secara langsung.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Skrip
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `npm run dev`: Menjalankan server pengembangan.
+- `npm run build`: Membangun aplikasi untuk produksi.
+- `npm run start`: Menjalankan server produksi.
+- `npm run lint`: Mengecek kode dengan linter.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Kontribusi
 
-## Learn More
+Kontribusi sangat diterima! Silakan buat **Pull Request** atau ajukan **Issue** untuk saran perbaikan.
 
-To learn more about Next.js, take a look at the following resources:
+## Lisensi
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Kontak
 
-## Deploy on Vercel
+Jika ada pertanyaan atau kebutuhan lainnya, silakan hubungi saya di [cakadi190@gmail.com](mailto:cakadi190@gmail.com).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Dibuat dengan ❤️ oleh Cak Adi.
