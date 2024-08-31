@@ -1,3 +1,6 @@
+// hello.ts
+export const runtime = 'edge';
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const getClientIp = (req: NextApiRequest) => {
@@ -5,7 +8,9 @@ const getClientIp = (req: NextApiRequest) => {
     req.headers['x-forwarded-for']?.toString().split(',').shift() ||
     req.socket.remoteAddress;
   
-  console.log(ip)
+  const ip2 = req.headers['x-forwarded-for'];
+  
+  console.log(ip, ip2);
 
   return ip;
 };
