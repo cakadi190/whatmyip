@@ -9,16 +9,21 @@ interface IPAddresses {
   ipv6?: string | null;
 }
 
+function extractCompanyName(org: string): string {
+  // Regular expression untuk menghapus "AS" diikuti oleh angka dan spasi
+  return org.replace(/^AS\d+\s*/, '');
+}
+
 const Home = () => {
   const [ips, setIps] = useState<IPAddresses>({ ipv4: null, ipv6: null });
   const [ipinfo, setIpInfo] = useState<IPinfo | null>(null);
-  
+
   const fetchIps = async () => {
     try {
       const response = await fetch('/api/get-ip');
       const data = await response.json();
       console.log(data.data)
-      
+
       setIps(data.data);
       setIpInfo(data.data.ipInfo);
     } catch (error) {
@@ -45,38 +50,35 @@ const Home = () => {
       </Head>
 
       <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-        <div className="bg-white dark:bg-gray-800 max-w-xl p-8 rounded-lg shadow-[0_1rem_2rem_rgba(0,0,0,0.0325)] text-center">
-          <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">Alamat IP Kamu Adalah</h1>
+        <div className="bg-white dark:bg-gray-800 max-w-2xl p-8 rounded-lg shadow-[0_1rem_2rem_rgba(0,0,0,0.0325)] text-center">
+          <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">Alamat IP Publik Kamu Adalah</h1>
 
-          {/* Tampilkan IPv4 */}
           {ips.ipv4 && (
-            <Link 
-              target='_blank' 
-              href={`http://${ips.ipv4}`} 
-              className="py-5 px-6 flex w-full items-center justify-center rounded-full border leading-none mb-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-2xl"
+            <Link
+              target='_blank'
+              href={`http://${ips.ipv4}`}
+              className="py-3 overflow-auto px-4 sm:py-4 sm:px-5 md:py-5 md:px-6 flex w-full items-center justify-center rounded-full border leading-none mb-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-lg sm:text-xl md:text-2xl"
             >
               <div className="opacity-25 mr-1">http://</div>
-              <div className="p-2 px-3 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 border rounded-lg">{ips.ipv4}</div>
+              <div className="p-1 px-2 sm:p-2 sm:px-3 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 border rounded-lg">{ips.ipv4}</div>
               <div className="opacity-25 ml-1">/</div>
             </Link>
           )}
 
-          {/* Tampilkan IPv6 */}
           {ips.ipv6 && (
-            <Link 
-              target='_blank' 
-              href={`http://[${ips.ipv6}]`} 
-              className="py-5 px-6 flex w-full items-center justify-center rounded-full border leading-none mb-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-2xl"
+            <Link
+              target='_blank'
+              href={`http://[${ips.ipv6}]`}
+              className="py-3 overflow-auto px-4 sm:py-4 sm:px-5 md:py-5 md:px-6 flex w-full items-center justify-center rounded-full border leading-none mb-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-lg sm:text-xl md:text-2xl"
             >
               <div className="opacity-25 mr-1">http://</div>
-              <div className="p-2 px-3 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 border rounded-lg">{ips.ipv6}</div>
+              <div className="p-1 px-2 sm:p-2 sm:px-3 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 border rounded-lg">{ips.ipv6}</div>
               <div className="opacity-25 ml-1">/</div>
             </Link>
           )}
 
-          <div className="mb-4 flex gap-1 justify-center items-center text-center">
-            <span>{(ipinfo && !ipinfo.bogon) ? `Alamat IP kamu berlokasi di Kota ${ipinfo.city}, ${ipinfo.country}` : 'IP Lokal / IP Bogon'}</span>
-            {(ipinfo && !ipinfo.bogon) && <Image src={ipinfo.countryFlagURL} alt={ipinfo.city} width={32} height={24} className="h-4" />}
+          <div className="mb-4 inline-block text-center">
+            <span dangerouslySetInnerHTML={{ __html: (ipinfo && !ipinfo.bogon) ? `Kamu menggunakan ISP dari <strong>${extractCompanyName(ipinfo.org)}</strong> dan alamat IP kamu berlokasi di Kota <strong>${ipinfo.city}, ${ipinfo.country}</strong>` : 'IP Lokal / IP Bogon' }} />
           </div>
 
           <p className="text-gray-600 dark:text-gray-400">
