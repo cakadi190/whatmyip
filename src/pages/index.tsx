@@ -49,11 +49,11 @@ const Home = () => {
           <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">Alamat IP Kamu Adalah</h1>
 
           {/* Tampilkan IPv4 */}
-          {ips.ipv4 && (
+          {ips.ipv6 && (
             <Link 
               target='_blank' 
               href={`http://${ips.ipv4}`} 
-              className="p-4 flex w-full justify-center rounded-full border leading-none mb-6 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-2xl"
+              className="py-5 px-6 flex w-full items-center justify-center rounded-full border leading-none mb-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-2xl"
             >
               <div className="opacity-25 mr-1">http://</div>
               <div className="p-2 px-3 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 border rounded-lg">{ips.ipv4}</div>
