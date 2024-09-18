@@ -7,23 +7,26 @@ import { useEffect, useState } from 'react';
 interface IPAddresses {
   ipv4?: string | null;
   ipv6?: string | null;
-  ipinfo?: IPinfo;
 }
 
 const Home = () => {
   const [ips, setIps] = useState<IPAddresses>({ ipv4: null, ipv6: null });
+  const [ipinfo, setIpInfo] = useState<IPinfo | null>(null);
+  
+  const fetchIps = async () => {
+    try {
+      const response = await fetch('/api/get-ip');
+      const data = await response.json();
+      console.log(data.data)
+      
+      setIps(data.data);
+      setIpInfo(data.data.ipInfo);
+    } catch (error) {
+      console.error('Error fetching IPs:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchIps = async () => {
-      try {
-        const response = await fetch('/api/get-ip');
-        const data = await response.json();
-        setIps(data.data);
-      } catch (error) {
-        console.error('Error fetching IPs:', error);
-      }
-    };
-
     fetchIps();
   }, []);
 
@@ -53,7 +56,7 @@ const Home = () => {
               className="p-4 flex w-full justify-center rounded-full border leading-none mb-6 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-2xl"
             >
               <div className="opacity-25 mr-1">http://</div>
-              {ips.ipv4}
+              <div className="p-2 px-3 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 border rounded-lg">{ips.ipv4}</div>
               <div className="opacity-25 ml-1">/</div>
             </Link>
           )}
@@ -63,17 +66,17 @@ const Home = () => {
             <Link 
               target='_blank' 
               href={`http://[${ips.ipv6}]`} 
-              className="p-4 flex w-full justify-center rounded-full border leading-none mb-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-2xl"
+              className="py-5 px-6 flex w-full items-center justify-center rounded-full border leading-none mb-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-200 font-mono text-2xl"
             >
               <div className="opacity-25 mr-1">http://</div>
-              {ips.ipv6}
+              <div className="p-2 px-3 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 border rounded-lg">{ips.ipv6}</div>
               <div className="opacity-25 ml-1">/</div>
             </Link>
           )}
 
-          <div className="mb-4 flex gap-2 justify-center align-items-center text-center">
-            <span>{ips.ipinfo && !ips.ipinfo.bogon ? `${ips.ipinfo.city}, ${ips.ipinfo.country}` : 'IP Lokal / Bogon'}</span>
-            {ips.ipinfo && !ips.ipinfo.bogon && <Image src={ips.ipinfo.countryFlagURL} alt={ips.ipinfo.city} width={32} height={24} />}
+          <div className="mb-4 flex gap-1 justify-center items-center text-center">
+            <span>Alamat IP kamu berlokasi di {(ipinfo && !ipinfo.bogon) ? `Kota ${ipinfo.city}, ${ipinfo.country}` : 'IP Lokal / IP Bogon'}</span>
+            {(ipinfo && !ipinfo.bogon) && <Image src={ipinfo.countryFlagURL} alt={ipinfo.city} width={32} height={24} className="h-4" />}
           </div>
 
           <p className="text-gray-600 dark:text-gray-400">
