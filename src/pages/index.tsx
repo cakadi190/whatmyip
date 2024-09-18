@@ -49,7 +49,7 @@ const Home = () => {
           <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">Alamat IP Kamu Adalah</h1>
 
           {/* Tampilkan IPv4 */}
-          {ips.ipv6 && (
+          {ips.ipv4 && (
             <Link 
               target='_blank' 
               href={`http://${ips.ipv4}`} 
