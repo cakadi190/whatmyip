@@ -77,9 +77,11 @@ const Home = () => {
             </Link>
           )}
 
-          <div className="mb-4 inline-block text-center">
+          {ipinfo ? (
+            <div className="mb-4 inline-block text-center">
             <span dangerouslySetInnerHTML={{ __html: (ipinfo && !ipinfo.bogon) ? `Kamu menggunakan ISP dari <strong>${extractCompanyName(ipinfo.org)}</strong> dan alamat IP kamu berlokasi di Kota <strong>${ipinfo.city}, ${ipinfo.country}</strong>` : 'IP Lokal / IP Bogon' }} />
           </div>
+          ) : 'Sedang Memuat...'}
 
           <p className="text-gray-600 dark:text-gray-400">
             Perlu diperhatikan, bahwa semua informasi yang ditampilkan ini tidak selamanya akurat. Adakalanya alamat IP yang tampil itu sesuai dengan ISP yang bersangkutan. Silahkan hubungi penyedia layanan internet anda untuk mendapatkan informasi lebih lanjut.
