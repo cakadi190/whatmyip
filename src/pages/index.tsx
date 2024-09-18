@@ -75,7 +75,7 @@ const Home = () => {
           )}
 
           <div className="mb-4 flex gap-1 justify-center items-center text-center">
-            <span>Alamat IP kamu berlokasi di {(ipinfo && !ipinfo.bogon) ? `Kota ${ipinfo.city}, ${ipinfo.country}` : 'IP Lokal / IP Bogon'}</span>
+            <span>{(ipinfo && !ipinfo.bogon) ? `Alamat IP kamu berlokasi di Kota ${ipinfo.city}, ${ipinfo.country}` : 'IP Lokal / IP Bogon'}</span>
             {(ipinfo && !ipinfo.bogon) && <Image src={ipinfo.countryFlagURL} alt={ipinfo.city} width={32} height={24} className="h-4" />}
           </div>
 
